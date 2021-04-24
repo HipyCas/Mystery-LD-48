@@ -21,14 +21,14 @@ public class LineConnection2 : MonoBehaviour
     if (Input.GetMouseButtonDown(0) && firstPosition == Vector3.zero)
     {
       firstPosition = GetPointInPlane();
-      lines.Add(Instantiate(connectorPrefab, firstPosition, Quaternion.Identity));
+      lines.Add(Instantiate(connectorPrefab, firstPosition, Quaternion.identity));
     }
 
     if (Input.GetMouseButton(0))
     {
       lastPosition = GetPointInPlane();
-      lines[index].rotation = Quaternion.Euler(0, 0, atan2(firstPosition.z - lastPosition.z, firstPosition.x - lastPosition.x) * 180 / PI);
-      lines[index].scale = Vector3(1, Vector3.Distance(firstPosition, lastPosition), 1);
+      lines[index].transform.rotation = Quaternion.Euler(0, 0, Mathf.Atan2(firstPosition.z - lastPosition.z, firstPosition.x - lastPosition.x) * 180 / Mathf.PI);
+      lines[index].transform.localScale = new Vector3(1, Vector3.Distance(firstPosition, lastPosition), 1);
     }
 
     if (Input.GetMouseButtonUp(0)) // Resetting the position of the positions for next time
@@ -48,6 +48,6 @@ public class LineConnection2 : MonoBehaviour
     {
       return hit.transform.position;
     }
-    else return null;
+    else return Vector3.zero;
   }
 }
