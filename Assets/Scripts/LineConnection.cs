@@ -43,12 +43,12 @@ public class LineConnection : MonoBehaviour
       Vector3 mousePos;
       mousePos = Input.mousePosition;
       Debug.Log(mousePos);
-      mousePos = Camera.main.ScreenToWorldPoint(mousePos);
+      mousePos = Camera.main.ScreenToWorldPoint(mousePos, 0);
 
       this.startPos = new Vector3(mousePos.x, mousePos.y, this.zPosition);
 
       this.connectorObject = Instantiate(this.connectorPrefab, this.startPos, Quaternion.identity);
-      this.connectorObject.transform.localScale = this.finalPos - this.startPos;
+      this.connectorObject.transform.localScale = new Vector3(this.xScale, 0f, this.zScale);
       this.connectorObject.transform.parent = transform;
       Debug.Log("Got this instance: " + this.connectorObject);
 
