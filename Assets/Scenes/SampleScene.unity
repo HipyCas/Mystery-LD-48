@@ -944,6 +944,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   camera: {fileID: 963194227}
+  connectorPrefab: {fileID: 8146047123953444571, guid: b9d37b6c5f8ae8b38afb9a8921bc049a, type: 3}
+  scaler: 1
 --- !u!1001 &477738377
 PrefabInstance:
   m_ObjectHideFlags: 0
