@@ -3,10 +3,10 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "PostIt", menuName = "Hint/Post It")]
 public class PostIt : Hint
 {
-  public string text;
+  public Sprite text;
 
-  void LogMe()
+  public void LogMe()
   {
-    Debug.Log(this.name + ": " + this.description + " (" + this.text + ")");
+    //Debug.Log(this.name + ": " + this.description + " (" + this.text + ")");
   }
 }
