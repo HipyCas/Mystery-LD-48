@@ -21,28 +21,21 @@ public class LineConnection : MonoBehaviour
     {
       Vector3 mousePos;
       mousePos = Input.mousePosition;
-      Debug.Log(mousePos);
       mousePos = new Vector3(mousePos.x, mousePos.y, this.zPosition);
       mousePos = Camera.main.ScreenToWorldPoint(mousePos, 0); // ! Causing mouse position to reset
-      Debug.Log("After camera: " + mousePos);
 
       this.finalPos = new Vector3(mousePos.x, mousePos.y, this.zPosition);
-      Debug.Log("This is the final position rn: " + this.finalPos + ", compared to start one: " + this.startPos);
 
       this.connectorObject.transform.localScale = new Vector3(this.xScale, this.finalPos.y - this.startPos.y, this.zScale);
-      Debug.Log("Scaled to " + this.connectorObject.transform.localScale);
     }
   }
 
   private void OnMouseDown()
   {
-    Debug.Log("At least, some mouse down happened");
     if (Input.GetMouseButtonDown(0))
     {
-      Debug.Log("Mouse down");
       Vector3 mousePos;
       mousePos = Input.mousePosition;
-      Debug.Log(mousePos);
       mousePos = Camera.main.ScreenToWorldPoint(mousePos, 0);
 
       this.startPos = new Vector3(mousePos.x, mousePos.y, this.zPosition);
@@ -50,7 +43,6 @@ public class LineConnection : MonoBehaviour
       this.connectorObject = Instantiate(this.connectorPrefab, this.startPos, Quaternion.identity);
       this.connectorObject.transform.localScale = new Vector3(this.xScale, 0f, this.zScale);
       this.connectorObject.transform.parent = transform;
-      Debug.Log("Got this instance: " + this.connectorObject);
 
       this.beingHeldDown = true;
     }
