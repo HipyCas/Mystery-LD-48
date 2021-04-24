@@ -29,7 +29,7 @@ public class LineConnection : MonoBehaviour
       float angle = Mathf.Atan2(this.finalPos.y - this.startPos.y, this.finalPos.x - this.startPos.x);
 
       this.connectorObject.transform.localScale = new Vector3(this.xScale, this.finalPos.y - this.startPos.y, this.zScale);
-      this.connectorObject.transform.rotation = Quaternion.Euler(0, 0, angle);
+      this.connectorObject.transform.localEulerAngles = new Vector3(0, 0, angle);
     }
   }
 
