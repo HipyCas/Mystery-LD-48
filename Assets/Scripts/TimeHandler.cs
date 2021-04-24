@@ -5,16 +5,20 @@ using UnityEngine.UI;
 
 public class TimeHandler : MonoBehaviour
 {
-  public int currentSeconds = 0;
-  public int currentDay = 1;
+  //public int currentSeconds = 0;
+  private int currentDay = 1;
   //public string startTime = "00:00:00";
+  private TimeSpan ts;
   public int startDay = 1;
-  public string journeyStart = "08:00:00";
-  private TimeSpan journeyStartSpan; // Left to implemnet dynamic update for this and below
-  public string journeyEnd = "20:00:00";
-  private TimeSpan journeyEndSpan;
+  public string journeyStartParseable = "08:00:00";
+  private TimeSpan journeyStart; // Left to implemnet dynamic update for this and below
+  public string journeyEndParseable = "20:00:00";
+  private TimeSpan journeyEnd;
   public Text timeText;
-  public int timeLimitSeconds = -1; // Set to -1 for no time limit
+  //public int timeLimitSeconds = -1; // Set to -1 for no time limit
+  //public int timeLimitDays = 0;
+  public string timeLimitParseable;
+  private TimeSpan timeLimit;
   public float timeSpeed = 1;
   private float lastTimeSpeed; // To detect time speed changes at runtime
   private const float MINIMUM_TIME_SPEED = 0.00001F;
@@ -23,13 +27,17 @@ public class TimeHandler : MonoBehaviour
   // Start is called before the first frame update
   void Start()
   {
+    // Parse time spans
+    TimeSpan.TryParse(this.journeyStartParseable, out this.journeyStart);
+    TimeSpan.TryParse(this.journeyEndParseable, out this.journeyEnd);
+    TimeSpan.TryParse(this.timeLimitParseable, out this.timeLimit);
+
     this.ResetJourney();
 
-    this.journeyStartSpan = TimeSpan.Parse(this.journeyStart);
-    this.journeyEndSpan = TimeSpan.Parse(this.journeyEnd);
+    if (this.startDay < 1) this.currentDay = 1;
+    else this.currentDay = this.startDay;
 
-    if (this.timeSpeed < MINIMUM_TIME_SPEED) this.timeSpeed = MINIMUM_TIME_SPEED;
-    else if (this.timeSpeed > MAXIMUM_TIME_SPEED) this.timeSpeed = MAXIMUM_TIME_SPEED;
+    this.FixSpeed();
 
     InvokeRepeating("IncreaseSeconds", 0f, (1f / this.timeSpeed));
     this.lastTimeSpeed = timeSpeed;
@@ -44,18 +52,16 @@ public class TimeHandler : MonoBehaviour
       this.Start();
     }
 
-    TimeSpan ts = TimeSpan.FromSeconds(currentSeconds);
-    Debug.Log("+ts: " + ts.Seconds + ", real: " + this.currentSeconds + ", journeyEnd" + this.journeyEndSpan.TotalSeconds);
-    if (this.currentSeconds >= this.journeyEndSpan.TotalSeconds)
-    {
-      this.ResetJourney();
-      this.currentDay += 1;
-    }
+    //TimeSpan ts = TimeSpan.FromSeconds(currentSeconds);
+    //Debug.Log("+ts: " + ts.Seconds + ", real: " + this.ts.TotalSeconds + ", journeyEnd" + this.journeyEnd.TotalSeconds);
+    if (this.ts.TotalSeconds >= this.journeyEnd.TotalSeconds) this.NextJourney();
 
     //this.timeText.text = hours.ToString() + ":" + minutes.ToString() + ":" + seconds.ToString() + " -> " + this.currentSeconds.ToString() + "s";
-    this.timeText.text = "Day " + this.currentDay + " " + ts.ToString("hh\\:mm\\:ss");
+    this.timeText.text = "Day " + this.currentDay + " " + this.ts.ToString("hh\\:mm\\:ss");
 
-    if (this.currentSeconds >= this.timeLimitSeconds && this.timeLimitSeconds >= 0)
+    // ? Make relative to journey start or absolute? Prob absolute better
+    // TODO take day from timeLimit ¿and add 1 to it? and compare with current day
+    if (this.ts.CompareTo(this.timeLimit) == 1 && this.timeLimit.CompareTo(TimeSpan.Zero) != 0)
     {
       this.timeText.color = new Color(255, 0, 0);
     }
@@ -63,7 +69,8 @@ public class TimeHandler : MonoBehaviour
 
   public void IncreaseSeconds()
   {
-    this.currentSeconds += 1;
+    //this.currentSeconds += 1;
+    this.ts = this.ts.Add(new TimeSpan(0, 0, 1));
   }
 
   public void StopTime()
@@ -73,6 +80,7 @@ public class TimeHandler : MonoBehaviour
 
   public void StartTime()
   {
+    this.FixSpeed();
     InvokeRepeating("IncreaseSeconds", 0f, (1f / this.timeSpeed));
   }
 
@@ -81,9 +89,30 @@ public class TimeHandler : MonoBehaviour
     InvokeRepeating("IncreaseSeconds", 0f, (1f / speed));
   }
 
+  private void FixSpeed()
+  {
+    //if (this.timeSpeed < MINIMUM_TIME_SPEED) this.timeSpeed = MINIMUM_TIME_SPEED;
+    if (this.timeSpeed < 0) this.timeSpeed = 0;
+    if (this.timeSpeed > MAXIMUM_TIME_SPEED) this.timeSpeed = MAXIMUM_TIME_SPEED;
+  }
+
+  public float FixSpeed(float speed)
+  {
+    if (speed < 0) return 0;
+    if (speed > MAXIMUM_TIME_SPEED) return MAXIMUM_TIME_SPEED;
+    return speed;
+  }
+
   public void ResetJourney()
   {
-    TimeSpan ts = TimeSpan.Parse(this.journeyStart);
-    this.currentSeconds = (int)ts.TotalSeconds;
+    //TimeSpan ts = TimeSpan.Parse(this.journeyStartParseable);
+    //this.currentSeconds = (int)ts.TotalSeconds
+    this.ts = this.journeyStart;
+  }
+
+  public void NextJourney()
+  {
+    this.ResetJourney();
+    this.currentDay++;
   }
 }
