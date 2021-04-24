@@ -394,9 +394,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   connectorPrefab: {fileID: 8146047123953444571, guid: b9d37b6c5f8ae8b38afb9a8921bc049a, type: 3}
-  zPosition: -0.3
+  zPosition: -0.35
   xScale: 0.1
   zScale: 0.1
+  camera: {fileID: 963194227}
 --- !u!4 &473382439
 Transform:
   m_ObjectHideFlags: 0
