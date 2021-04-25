@@ -67,14 +67,14 @@ public class LineConnection2 : MonoBehaviour
     {
       isDragging = false; // Dragging stops
 
-      if(isPin) // If you stop dragging in a pin the connector stops so you can make a new one
+      if (isPin) // If you stop dragging in a pin the connector stops so you can make a new one
       {
-      firstPosition = Vector3.zero;
-      lastPosition = Vector3.zero;
-      index++;
+        firstPosition = Vector3.zero;
+        lastPosition = Vector3.zero;
+        index++;
       }
       // FIX ME: Check if current index has a line or not, only destroy it when it does
-      else if(lines[index] != null) // Else, you will destroy the current line, so you can start a new one (if on corkboard)
+      else if (index < lines.Count) //lines[index] != null) // Else, you will destroy the current line, so you can start a new one (if on corkboard)
       {
         Destroy(lines[index]);
       }
