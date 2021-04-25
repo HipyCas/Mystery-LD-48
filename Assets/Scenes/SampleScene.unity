@@ -3680,9 +3680,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 1964384972}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9dcffe4c957f137899363c1e10a22fef, type: 3}
+  m_Script: {fileID: 11500000, guid: 89ce260c47f9e748a9cb8c39d10f6508, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tracks:
+  - name: Study_and_Relax
+    clip: {fileID: 8300000, guid: ca26817207b00d0af96f68483c403d56, type: 3}
+    volume: 1
+    pitch: 1
+    source: {fileID: 0}
+  - name: The_Celebrated_Minuet
+    clip: {fileID: 8300000, guid: 7d70a318b071191a8a9361215f2de1fe, type: 3}
+    volume: 0.55
+    pitch: 1
+    source: {fileID: 0}
+  playLoop: 1
 --- !u!4 &1964384974
 Transform:
   m_ObjectHideFlags: 0
