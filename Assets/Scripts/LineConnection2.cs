@@ -19,6 +19,7 @@ public class LineConnection2 : MonoBehaviour
   private GameObject connectionsParent;
 
   private bool isDragging = false;
+  private bool isPin = false;
 
   private void Start()
   {
@@ -27,7 +28,27 @@ public class LineConnection2 : MonoBehaviour
 
   private void Update()
   {
-    if (Input.GetMouseButtonDown(0) && firstPosition == Vector3.zero)
+
+    Ray ray = camera.ScreenPointToRay(Input.mousePosition);
+    RaycastHit hit;
+    if (Physics.Raycast(ray, out hit, 100)) // 100 is the max distance the ray reaches (consumes less resources)
+    {
+      if (hit.transform.gameObject.tag == "Connection" && !isDragging && Input.GetMouseButtonDown(2)) // Destroys connection if right clicked
+      {
+        Destroy(hit.transform.gameObject);
+      }
+
+      if (hit.transform.gameObject.tag == "Pin")
+      {
+        isPin = true;
+      }
+      else
+      {
+        isPin = false;
+      }
+    }
+
+    if (Input.GetMouseButtonDown(0) && firstPosition == Vector3.zero && isPin)
     {
       isDragging = true;
       firstPosition = GetPointInPlane();
@@ -44,15 +65,17 @@ public class LineConnection2 : MonoBehaviour
 
     if (Input.GetMouseButtonUp(0)) // Resetting the position of the positions for next time
     {
+      isDragging = false;
+      if(isPin)
+      {
       firstPosition = Vector3.zero;
       lastPosition = Vector3.zero;
-      isDragging = false;
       index++;
-    }
-
-    if (Input.GetMouseButton(1))
-    {
-      lastPosition = GetPointInPlane(); // Dummy function to destroy lines
+      }
+      else
+      {
+        Destroy(lines[index]);
+      }
     }
 
   }
@@ -63,18 +86,11 @@ public class LineConnection2 : MonoBehaviour
     RaycastHit hit;
     if (Physics.Raycast(ray, out hit, 100)) // 100 is the max distance the ray reaches (consumes less resources)
     {
-      if (hit.transform.gameObject.tag == "Connection" && !isDragging) // Destroys connection if right clicked
-      {
-        Destroy(hit.transform.gameObject);
-      }
       return hit.point;
     }
     else
     {
-      Destroy(lines[index]);
-      isDragging = false;
-      //index--;
-      return Vector3.zero;
+      return lastPosition;
     }
   }
 }
