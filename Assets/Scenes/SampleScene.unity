@@ -2104,6 +2104,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   zoomScale: 1
+  maxFieldOfView: 90
+  minFieldOfView: 23
   topLeft: {x: 0.5, y: 8, z: 0}
   rightBottom: {x: 5.5, y: 3, z: 0}
   cameraMultiplier: 0.9

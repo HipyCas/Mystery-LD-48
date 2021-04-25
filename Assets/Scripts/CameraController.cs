@@ -8,6 +8,9 @@ public class CameraController : MonoBehaviour
   private new Camera camera;
   private Vector3 lastPoint = Vector3.zero;
 
+  public int maxFieldOfView = 90;
+  public int minFieldOfView = 5;
+
   [SerializeField] private Vector3 topLeft, rightBottom;
 
   [SerializeField] private float cameraMultiplier = .9f;
@@ -29,6 +32,6 @@ public class CameraController : MonoBehaviour
 
     transform.LookAt(newPosition, Vector3.up);
 
-    if ((camera.fieldOfView < 90 && Input.mouseScrollDelta.y > 0) || (camera.fieldOfView > 5 && Input.mouseScrollDelta.y < 0)) camera.fieldOfView += Input.mouseScrollDelta.y * zoomScale;
+    if ((camera.fieldOfView < maxFieldOfView && Input.mouseScrollDelta.y > 0) || (camera.fieldOfView > minFieldOfView && Input.mouseScrollDelta.y < 0)) camera.fieldOfView += Input.mouseScrollDelta.y * zoomScale;
   }
 }
