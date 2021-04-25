@@ -22,7 +22,7 @@ public class CameraController : MonoBehaviour
   private void Update()
   {
     var coordinates = new Vector2(Input.mousePosition.x / Screen.width, Input.mousePosition.y / Screen.height);
-    print(coordinates);
+    //print(coordinates);
     var x = Mathf.Lerp(topLeft.x, rightBottom.x, coordinates.x);
     var y = Mathf.Lerp(rightBottom.y, topLeft.y, coordinates.y);
     var newPosition = new Vector3(x, y, 0f);
