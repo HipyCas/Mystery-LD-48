@@ -23,10 +23,17 @@ public class TimeHandler : MonoBehaviour
   private float lastTimeSpeed; // To detect time speed changes at runtime
   private const float MINIMUM_TIME_SPEED = 0.00001F;
   private const float MAXIMUM_TIME_SPEED = 99999F;
+  [SerializeField] private GameObject hourHand;
+  [SerializeField] private GameObject minuteHand;
 
   // Start is called before the first frame update
   void Start()
   {
+    // Obtain clock hands
+    hourHand = GameObject.Find("HourHand"); // ? Change to "/Clock/HourHand"
+    minuteHand = GameObject.Find("MinuteHand"); // ? Change to "/Clock/MinuteHand"
+    // TODO Move string identifiers to project-wide constants
+
     // Parse time spans
     TimeSpan.TryParse(this.journeyStartParseable, out this.journeyStart);
     TimeSpan.TryParse(this.journeyEndParseable, out this.journeyEnd);
@@ -46,6 +53,11 @@ public class TimeHandler : MonoBehaviour
   // Update is called once per frame
   void Update()
   {
+    hourHand.transform.rotation = Quaternion.Euler(hourHand.transform.rotation.x, hourHand.transform.rotation.y, -(360f * (float)(ts.TotalHours - (double)ts.Hours)));
+    minuteHand.transform.rotation = Quaternion.Euler(minuteHand.transform.rotation.x, minuteHand.transform.rotation.y, -(360f / (float)(ts.TotalMinutes - (double)ts.Minutes)));
+    Debug.Log("Minute rotation: " + -(360f * (float)(ts.TotalMinutes - (double)ts.Minutes)) + "( TotalMinutes: " + ts.TotalMinutes + ", Minutes: " + ts.Minutes + ")");
+    Debug.Log("Meanwhile, hour rotation: " + -(360f * (float)(ts.TotalHours - (double)ts.Hours)) + "( TotalHours: " + ts.TotalHours + ", Hours: " + ts.Hours + ")");
+
     if (this.timeSpeed != this.lastTimeSpeed)
     {
       this.StopTime();
