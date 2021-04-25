@@ -16,7 +16,7 @@ public class LineConnection2 : MonoBehaviour
 
   private List<GameObject> lines = new List<GameObject>();
 
-  [SerializeField] private GameObject connectionsParent;
+  private GameObject connectionsParent;
 
   private bool isDragging = false;
 
@@ -29,8 +29,8 @@ public class LineConnection2 : MonoBehaviour
   {
     if (Input.GetMouseButtonDown(0) && firstPosition == Vector3.zero)
     {
-      firstPosition = GetPointInPlane();
       isDragging = true;
+      firstPosition = GetPointInPlane();
       lines.Add(Instantiate(connectorPrefab, firstPosition, Quaternion.identity));
       lines[index].transform.parent = connectionsParent.transform;
     }
@@ -50,6 +50,11 @@ public class LineConnection2 : MonoBehaviour
       index++;
     }
 
+    if (Input.GetMouseButton(1))
+    {
+      lastPosition = GetPointInPlane(); // Dummy function to destroy lines
+    }
+
   }
 
   private Vector3 GetPointInPlane()
@@ -58,6 +63,10 @@ public class LineConnection2 : MonoBehaviour
     RaycastHit hit;
     if (Physics.Raycast(ray, out hit, 100)) // 100 is the max distance the ray reaches (consumes less resources)
     {
+      if (hit.transform.gameObject.tag == "Connection" && !isDragging) // Destroys connection if right clicked
+      {
+        Destroy(hit.transform.gameObject);
+      }
       return hit.point;
     }
     else
