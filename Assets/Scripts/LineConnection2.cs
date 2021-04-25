@@ -18,6 +18,8 @@ public class LineConnection2 : MonoBehaviour
 
   [SerializeField] private GameObject connectionsParent;
 
+  private bool isDragging = false;
+
   private void Start()
   {
     connectionsParent = GameObject.Find("/ConnectionsParent");
@@ -28,11 +30,12 @@ public class LineConnection2 : MonoBehaviour
     if (Input.GetMouseButtonDown(0) && firstPosition == Vector3.zero)
     {
       firstPosition = GetPointInPlane();
+      isDragging = true;
       lines.Add(Instantiate(connectorPrefab, firstPosition, Quaternion.identity));
       lines[index].transform.parent = connectionsParent.transform;
     }
 
-    if (Input.GetMouseButton(0))
+    if (Input.GetMouseButton(0) && isDragging)
     {
       lastPosition = GetPointInPlane();
       lines[index].transform.rotation = Quaternion.Euler(0, 0, (Mathf.Atan2(firstPosition.y - lastPosition.y, firstPosition.x - lastPosition.x) * 180f / Mathf.PI) - 90);
@@ -43,6 +46,7 @@ public class LineConnection2 : MonoBehaviour
     {
       firstPosition = Vector3.zero;
       lastPosition = Vector3.zero;
+      isDragging = false;
       index++;
     }
 
@@ -59,7 +63,8 @@ public class LineConnection2 : MonoBehaviour
     else
     {
       Destroy(lines[index]);
-      index--;
+      isDragging = false;
+      //index--;
       return Vector3.zero;
     }
   }
