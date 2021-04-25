@@ -46,7 +46,7 @@ public class LineConnection2 : MonoBehaviour
     RaycastHit hit;
     if (Physics.Raycast(ray, out hit, 100)) // 100 is the max distance the ray reaches (consumes less resources)
     {
-      return hit.transform.position;
+      return hit.point;
     }
     else return Vector3.zero;
   }
