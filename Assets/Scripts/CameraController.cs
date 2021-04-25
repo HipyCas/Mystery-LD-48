@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-
+  public float zoomScale = 1f;
   private new Camera camera;
   private Vector3 lastPoint = Vector3.zero;
 
@@ -15,7 +15,8 @@ public class CameraController : MonoBehaviour
 
   private void Start()
   {
-    camera = GetComponent<Camera>();
+    //camera = GetComponent<Camera>();
+    camera = Camera.main;
   }
 
   private void Update()
@@ -27,5 +28,7 @@ public class CameraController : MonoBehaviour
     var newPosition = new Vector3(x, y, 0f);
 
     transform.LookAt(newPosition, Vector3.up);
+
+    if (camera.fieldOfView < 90 && camera.fieldOfView > 5) camera.fieldOfView += Input.mouseScrollDelta.y * zoomScale;
   }
 }

@@ -1694,6 +1694,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e172f60d0f77a943999fdd795a0d9d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  zoomScale: 1
   topLeft: {x: 0.5, y: 8, z: 0}
   rightBottom: {x: 5.5, y: 3, z: 0}
   cameraMultiplier: 0.9
