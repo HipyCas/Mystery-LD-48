@@ -29,7 +29,7 @@ public class LineConnection2 : MonoBehaviour
   private void Update()
   {
 
-    Ray ray = camera.ScreenPointToRay(Input.mousePosition);
+    Ray ray = camera.ScreenPointToRay(Input.mousePosition); // Clone to the function (checks if the ray is colliding with a connection or a pin)
     RaycastHit hit;
     if (Physics.Raycast(ray, out hit, 100)) // 100 is the max distance the ray reaches (consumes less resources)
     {
@@ -38,7 +38,7 @@ public class LineConnection2 : MonoBehaviour
         Destroy(hit.transform.gameObject);
       }
 
-      if (hit.transform.gameObject.tag == "Pin")
+      if (hit.transform.gameObject.tag == "Pin") // The prefab has a tag called "Pin"
       {
         isPin = true;
       }
@@ -48,7 +48,7 @@ public class LineConnection2 : MonoBehaviour
       }
     }
 
-    if (Input.GetMouseButtonDown(0) && firstPosition == Vector3.zero && isPin)
+    if (Input.GetMouseButtonDown(0) && !isDragging && isPin) // If there is no dragging line, start one
     {
       isDragging = true;
       firstPosition = GetPointInPlane();
@@ -56,7 +56,7 @@ public class LineConnection2 : MonoBehaviour
       lines[index].transform.parent = connectionsParent.transform;
     }
 
-    if (Input.GetMouseButton(0) && isDragging)
+    if (Input.GetMouseButton(0) && isDragging) // If player is dragging change the last position of the connector
     {
       lastPosition = GetPointInPlane();
       lines[index].transform.rotation = Quaternion.Euler(0, 0, (Mathf.Atan2(firstPosition.y - lastPosition.y, firstPosition.x - lastPosition.x) * 180f / Mathf.PI) - 90);
@@ -65,14 +65,16 @@ public class LineConnection2 : MonoBehaviour
 
     if (Input.GetMouseButtonUp(0)) // Resetting the position of the positions for next time
     {
-      isDragging = false;
-      if(isPin)
+      isDragging = false; // Dragging stops
+
+      if(isPin) // If you stop dragging in a pin the connector stops so you can make a new one
       {
       firstPosition = Vector3.zero;
       lastPosition = Vector3.zero;
       index++;
       }
-      else
+      // FIX ME: Check if current index has a line or not, only destroy it when it does
+      else if(lines[index] != null) // Else, you will destroy the current line, so you can start a new one (if on corkboard)
       {
         Destroy(lines[index]);
       }
@@ -86,11 +88,13 @@ public class LineConnection2 : MonoBehaviour
     RaycastHit hit;
     if (Physics.Raycast(ray, out hit, 100)) // 100 is the max distance the ray reaches (consumes less resources)
     {
-      return hit.point;
+      return hit.point; // Returns the point that hits the raycast
     }
-    else
+    else // Destorys line if it exists the corkboard
     {
-      return lastPosition;
+      Destroy(lines[index]);
+      isDragging = false;
+      return Vector3.zero;
     }
   }
 }
