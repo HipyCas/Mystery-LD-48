@@ -60,7 +60,9 @@ public class MusicManager : MonoBehaviour
 
   public void PlayNext()
   {
-    tracks[playingTrack++].source.Play();
+    tracks[playingTrack].source.Play();
+    if (playingTrack == tracks.Length - 1) playingTrack = 0;
+    else playingTrack++;
   }
 
   public void Loop()
