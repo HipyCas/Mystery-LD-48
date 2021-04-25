@@ -47,6 +47,7 @@ public class LineConnection2 : MonoBehaviour
         isPin = false;
       }
     }
+    else return;
 
     if (Input.GetMouseButtonDown(0) && !isDragging && isPin) // If there is no dragging line, start one
     {
@@ -56,7 +57,7 @@ public class LineConnection2 : MonoBehaviour
       lines[index].transform.parent = connectionsParent.transform;
     }
 
-    if (Input.GetMouseButton(0) && isDragging) // If player is dragging change the last position of the connector
+    if (Input.GetMouseButton(0) && isDragging && index < lines.Count && index >= 0) // If player is dragging change the last position of the connector
     {
       lastPosition = GetPointInPlane();
       lines[index].transform.rotation = Quaternion.Euler(0, 0, (Mathf.Atan2(firstPosition.y - lastPosition.y, firstPosition.x - lastPosition.x) * 180f / Mathf.PI) - 90);
@@ -77,6 +78,7 @@ public class LineConnection2 : MonoBehaviour
       else if (index < lines.Count) //lines[index] != null) // Else, you will destroy the current line, so you can start a new one (if on corkboard)
       {
         Destroy(lines[index]);
+        lines.RemoveAt(index);
       }
     }
 
