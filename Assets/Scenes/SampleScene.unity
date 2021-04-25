@@ -1854,7 +1854,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: fecbd1be3c2aee49abdf6ffbac71ffac, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.35
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -3899,7 +3899,15 @@ MonoBehaviour:
     volume: 1
     pitch: 1
     source: {fileID: 0}
-  playLoop: 1
+  playLoop: 0
+  playRandom: 1
+  playedTracks: []
+  lastPlayed:
+    name: 
+    clip: {fileID: 0}
+    volume: 1
+    pitch: 1
+    source: {fileID: 0}
 --- !u!4 &1964384974
 Transform:
   m_ObjectHideFlags: 0

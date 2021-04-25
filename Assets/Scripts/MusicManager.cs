@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System;
 using UnityEngine;
 //using UnityEngine.Audio;
@@ -11,7 +12,11 @@ public class MusicManager : MonoBehaviour
 
   private int playingTrack = 0;
 
-  public bool playLoop = true;
+  public bool playLoop = false;
+
+  public bool playRandom = false;
+  [SerializeField] private List<Track> playedTracks;
+  [SerializeField] private Track lastPlayed;
 
   // Start is called before the first frame update
   void Awake()
@@ -39,13 +44,25 @@ public class MusicManager : MonoBehaviour
   private void Start()
   {
     //if (playLoop) Invoke("Loop", 1f);
-    PlayNext();
+    //PlayNext();
   }
 
   private void Update()
   {
+    if (playedTracks.Count == tracks.Length)
+    {
+      playedTracks.RemoveAll(track => true);
+    }
+
     //if (!AnyPlaying() && playLoop) Loop();
-    if (!AnyPlaying() && playLoop) PlayNext();
+    if (!AnyPlaying() && playLoop)
+    {
+      PlayNext();
+    }
+    if (!AnyPlaying() && playRandom)
+    {
+      PlayRandomNoRepeat();
+    }
   }
 
   public void Play(string name)
@@ -73,6 +90,19 @@ public class MusicManager : MonoBehaviour
       while (tracks[playingTrack].source.isPlaying) { }
       playingTrack++;
     }
+  }
+
+  public void PlayRandomNoRepeat()
+  {
+    System.Random rand = new System.Random();
+    Track track;
+    do
+    {
+      track = tracks[rand.Next(tracks.Length)];
+    } while (Array.Find<Track>(playedTracks.ToArray(), t => track.name == t.name) != null || lastPlayed.name == track.name);
+    playedTracks.Add(track);
+    lastPlayed = track;
+    track.source.Play();
   }
 
   public bool AnyPlaying()
