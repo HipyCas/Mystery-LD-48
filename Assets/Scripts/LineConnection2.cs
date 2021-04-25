@@ -27,7 +27,7 @@ public class LineConnection2 : MonoBehaviour
     if (Input.GetMouseButton(0))
     {
       lastPosition = GetPointInPlane();
-      lines[index].transform.rotation = Quaternion.Euler(0, 0, Mathf.Atan2(firstPosition.z - lastPosition.z, firstPosition.x - lastPosition.x) * 180 / Mathf.PI);
+      lines[index].transform.rotation = Quaternion.Euler(0, 0, Mathf.Atan2(firstPosition.y - lastPosition.y, firstPosition.x - lastPosition.x) * 180f / Mathf.PI);
       lines[index].transform.localScale = new Vector3(1, Vector3.Distance(firstPosition, lastPosition), 1);
     }
 
@@ -48,6 +48,10 @@ public class LineConnection2 : MonoBehaviour
     {
       return hit.point;
     }
-    else return Vector3.zero;
+    else
+    {
+      Destroy(lines[index]);
+      return Vector3.zero;
+    }
   }
 }
