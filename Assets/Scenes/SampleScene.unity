@@ -1060,9 +1060,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 473382439}
-  - component: {fileID: 473382438}
-  - component: {fileID: 473382440}
-  - component: {fileID: 473382441}
   - component: {fileID: 473382442}
   m_Layer: 0
   m_Name: Connections
@@ -1071,23 +1068,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &473382438
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 473382437}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5a767e86a76c9b7c380c1062fc23d79b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  connectorPrefab: {fileID: 8146047123953444571, guid: b9d37b6c5f8ae8b38afb9a8921bc049a, type: 3}
-  zPosition: -0.35
-  xScale: 0.1
-  zScale: 0.1
-  camera: {fileID: 963194227}
 --- !u!4 &473382439
 Transform:
   m_ObjectHideFlags: 0
@@ -1102,27 +1082,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &473382440
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 473382437}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!65 &473382441
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 473382437}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &473382442
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1138,6 +1097,7 @@ MonoBehaviour:
   camera: {fileID: 963194227}
   connectorPrefab: {fileID: 8146047123953444571, guid: b9d37b6c5f8ae8b38afb9a8921bc049a, type: 3}
   scaler: 1
+  connectionsParent: {fileID: 0}
 --- !u!1001 &477738377
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1772,6 +1732,36 @@ MonoBehaviour:
   topLeft: {x: 0.5, y: 8, z: 0}
   rightBottom: {x: 5.5, y: 3, z: 0}
   cameraMultiplier: 0.9
+--- !u!1 &994450369
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 994450370}
+  m_Layer: 0
+  m_Name: ConnectionsParent
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &994450370
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 994450369}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 3.347818, y: 12.95158, z: 0.13178453}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 20
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1009699261
 PrefabInstance:
   m_ObjectHideFlags: 0
