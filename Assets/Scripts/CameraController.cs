@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-  
-  private Camera camera;
+
+  private new Camera camera;
   private Vector3 lastPoint = Vector3.zero;
 
   [SerializeField] private Vector3 topLeft, rightBottom;
