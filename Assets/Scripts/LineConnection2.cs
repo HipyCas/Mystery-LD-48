@@ -50,7 +50,7 @@ public class LineConnection2 : MonoBehaviour
     RaycastHit hit;
     if (Physics.Raycast(ray, out hit, 100)) // 100 is the max distance the ray reaches (consumes less resources)
     {
-      if (hit.transform.gameObject.tag == "Connection" && !isDragging && Input.GetMouseButtonDown(2)) // Destroys connection if right clicked
+      if (hit.transform.gameObject.tag == "Connection" && !isDragging && (Input.GetMouseButtonDown(2) || Input.GetKey("delete"))) // Destroys connection if right clicked
       {
         Destroy(hit.transform.gameObject);
       }
