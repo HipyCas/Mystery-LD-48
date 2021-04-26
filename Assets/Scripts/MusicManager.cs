@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System;
+using System.Collections;
 using UnityEngine;
 //using UnityEngine.Audio;
 
@@ -23,6 +24,8 @@ public class MusicManager : MonoBehaviour
 
   public bool isPaused = false; // ! YOU SHOULD IN NO WAY USE THE FIELD, IT IS JUST THAT, FOR SOME REASON, THE PROPERTY BELOW DOESN'T WORK
   public bool IsPaused { get; set; }
+
+  public float startFadeDuration = 0f;
 
   // Start is called before the first frame update
   void Awake()
@@ -69,6 +72,11 @@ public class MusicManager : MonoBehaviour
     if (!AnyPlaying() && playRandom && !isPaused)
     {
       PlayRandomNoRepeat();
+    }
+    if (AnyPlaying())
+    {
+      GetPlaying().source.volume = 0;
+      FadeIn(startFadeDuration);
     }
   }
 
@@ -198,5 +206,24 @@ public class MusicManager : MonoBehaviour
     if (AnyPlaying()) GetPlaying().source.Stop();
     if (playRandom) PlayRandomNoRepeat();
     else PlayNext();
+  }
+
+  private static IEnumerator StartFade(Track track, float duration, float targetVolume)
+  {
+    float currentTime = 0;
+    float start = track.source.volume;
+
+    while (currentTime < duration)
+    {
+      currentTime += Time.deltaTime;
+      track.source.volume = Mathf.Lerp(start, targetVolume, currentTime / duration);
+      yield return null;
+    }
+    yield break;
+  }
+
+  public void FadeIn(float duration)
+  {
+    StartCoroutine(StartFade(GetPlaying(), duration, GetPlaying().volume));
   }
 }

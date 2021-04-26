@@ -4764,6 +4764,7 @@ MonoBehaviour:
     pitch: 1
     source: {fileID: 0}
   isPaused: 0
+  startFadeDuration: 3
 --- !u!4 &2145152979 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 95f16a5ecc9156f47b440722fb448cc5, type: 3}
