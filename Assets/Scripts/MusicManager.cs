@@ -150,18 +150,15 @@ public class MusicManager : MonoBehaviour
 
   private void PausePlaying()
   {
-    Debug.Log("Going to pause " + GetPlaying().name + " as it is definetly playing (that is " + AnyPlaying() + ")");
     if (AnyPlaying())
     {
       GetPlaying().source.Pause();
-      Debug.Log("I just paused the song, so now if you say there are any playing that's " + AnyPlaying());
       isPaused = true;
     }
   }
 
   private void UnPausePlaying()
   {
-    Debug.Log("Ok! Whatever you want! I'm unpausing it then");
     //if (!AnyPlaying()) GetPlaying().source.UnPause(); // ! This will never happen I guess
     /*else*/
     lastPlayed.source.UnPause();
@@ -182,7 +179,6 @@ public class MusicManager : MonoBehaviour
 
   public void Pause()
   {
-    Debug.Log("Is paused? " + isPaused + ". Not any playing? " + !AnyPlaying());
     if (!AnyPlaying() || isPaused) return;
     else PausePlaying();
     isPaused = true;
@@ -193,7 +189,6 @@ public class MusicManager : MonoBehaviour
 
     if (AnyPlaying() || !isPaused)
     {
-      Debug.Log("Don't what the hell you're trying, I'm just returning");
       return;
     } // Song playing
     else if (isPaused) UnPausePlaying(); // Song paused

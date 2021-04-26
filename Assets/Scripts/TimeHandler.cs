@@ -68,8 +68,6 @@ public class TimeHandler : MonoBehaviour
   {
     hourHand.transform.rotation = Quaternion.Euler(hourHand.transform.rotation.x, hourHand.transform.rotation.y, -((360f * 2f) * (float)(ts.TotalDays - (double)ts.Days)));
     minuteHand.transform.rotation = Quaternion.Euler(minuteHand.transform.rotation.x, minuteHand.transform.rotation.y, -(360f * (float)(ts.TotalHours - (double)ts.Hours)));
-    //Debug.Log("Minute rotation: " + -(360f * (float)(ts.TotalMinutes - (double)ts.Minutes)) + "( TotalMinutes: " + ts.TotalMinutes + ", Minutes: " + ts.Minutes + ")");
-    //Debug.Log("Meanwhile, hour rotation: " + -(360f * (float)(ts.TotalHours - (double)ts.Hours)) + "( TotalHours: " + ts.TotalHours + ", Hours: " + ts.Hours + ")");
 
     if (this.timeSpeed != this.lastTimeSpeed)
     {
@@ -78,7 +76,6 @@ public class TimeHandler : MonoBehaviour
     }
 
     //TimeSpan ts = TimeSpan.FromSeconds(currentSeconds);
-    //Debug.Log("+ts: " + ts.Seconds + ", real: " + this.ts.TotalSeconds + ", journeyEnd" + this.journeyEnd.TotalSeconds);
     if (this.ts.TotalSeconds >= this.journeyEnd.TotalSeconds) this.NextJourney();
 
     //this.timeText.text = hours.ToString() + ":" + minutes.ToString() + ":" + seconds.ToString() + " -> " + this.currentSeconds.ToString() + "s";
