@@ -40,7 +40,7 @@ public class LineConnection2 : MonoBehaviour
   private void Start()
   {
     connectionsParent = GameObject.Find(Constants.CONNECTIONS_PARENT_SELECTOR);
-    player = Constants.GetPlayer();
+    player = Constants.GetPlayer() ?? new Player();
   }
 
   private void Update()
@@ -73,7 +73,7 @@ public class LineConnection2 : MonoBehaviour
       PinWrapper tempWrap = GetPointInPlane();
       if (tempWrap == null) return;
       firstPosition = tempWrap.point;
-      firstPin = tempWrap.pin;
+      firstPin = tempWrap.pin ?? new Pin();
 
       lines.Add(Instantiate(connectorPrefab, firstPosition, Quaternion.identity));
       lines[index].transform.parent = connectionsParent.transform;
@@ -90,7 +90,7 @@ public class LineConnection2 : MonoBehaviour
         return;
       }
       lastPosition = tempWrap.point;
-      lastPin = tempWrap.pin;
+      lastPin = tempWrap.pin ?? new Pin();
 
       lines[index].transform.rotation = Quaternion.Euler(0, 0, (Mathf.Atan2(firstPosition.y - lastPosition.y, firstPosition.x - lastPosition.x) * 180f / Mathf.PI) - 90);
       lines[index].transform.localScale = new Vector3(1, Vector3.Distance(firstPosition, lastPosition) / 2f, 1);
