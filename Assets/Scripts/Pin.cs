@@ -7,9 +7,9 @@ public class Pin : MonoBehaviour
 
   public Hint hint;
 
-  public List<Node> nodes;
+  //public List<Node> nodes;
 
-  private bool hitMe;
+  //private bool hitMe;
 
   // Start is called before the first frame update
   void Start()
@@ -20,6 +20,7 @@ public class Pin : MonoBehaviour
   // Update is called once per frame
   void Update()
   {
+    /*
     hitMe = false;
 
     Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition); // Clone to the function (checks if the ray is colliding with a connection or a pin)
@@ -37,9 +38,10 @@ public class Pin : MonoBehaviour
     {
       foreach (Node node in nodes)
       {
-        Destroy(node.gameObject);
+        Destroy(GameObject.Find(node.instanceID.ToString())); // Only works thanks to the renaming in LineConnection2.cs line
       }
     }
+    */
   }
 
 }

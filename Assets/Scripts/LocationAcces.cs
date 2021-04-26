@@ -22,6 +22,6 @@ public class LocationAcces : MonoBehaviour
 
   public void CheckRequirements()
   {
-    if (this.player.collectedNodes[0] != this.location.requiredNodes[0]) Debug.Log("Falsy");
+    //if (this.player.collectedNodes[0] != this.location.requiredNodes[0]) Debug.Log("Falsy");
   }
 }

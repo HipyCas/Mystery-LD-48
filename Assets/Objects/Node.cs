@@ -7,14 +7,14 @@ public class Node : ScriptableObject
   public Hint second;
   public readonly string identifer;
 
-  public int instanceID;
+  //public int instanceID;
 
-  public Node(Hint firstHint, Hint secondHint, int connectionGameObjectID)
+  public Node(Hint firstHint, Hint secondHint)//, int connectionGameObjectID)
   {
     first = firstHint;
     second = secondHint;
     identifer = first.name + "_" + second.name;
 
-    instanceID = connectionGameObjectID;
+    //instanceID = connectionGameObjectID;
   }
 }
