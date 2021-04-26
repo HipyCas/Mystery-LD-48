@@ -18,6 +18,8 @@ public class MusicManager : MonoBehaviour
   [SerializeField] private List<Track> playedTracks;
   [SerializeField] private Track lastPlayed;
 
+  public Track LastPlayed { get; }
+
   // Start is called before the first frame update
   void Awake()
   {
@@ -75,6 +77,11 @@ public class MusicManager : MonoBehaviour
     t.source.Play();
   }
 
+  public void Play(Track track)
+  {
+    track.source.Play();
+  }
+
   public void PlayNext()
   {
     tracks[playingTrack].source.Play();
@@ -112,5 +119,37 @@ public class MusicManager : MonoBehaviour
       if (t.source.isPlaying) return true;
     }
     return false;
+  }
+
+  public Track GetPlaying()
+  {
+    foreach (Track t in tracks)
+    {
+      if (t.source.isPlaying) return t;
+    }
+    return null;
+  }
+
+  public void PausePlaying()
+  {
+    if (AnyPlaying()) GetPlaying().source.Pause();
+  }
+
+  public void UnPausePlaying()
+  {
+    if (!AnyPlaying()) GetPlaying().source.UnPause(); // ! This will never happen I guess
+    else lastPlayed.source.UnPause();
+  }
+
+  public void StopPlaying()
+  {
+    if (AnyPlaying()) GetPlaying().source.Stop();
+    else lastPlayed.source.Stop();
+  }
+
+  public void PlayLast()
+  {
+    if (!AnyPlaying()) lastPlayed.source.Play();
+    else Debug.LogWarning("There is already a track playing, cannot play last");
   }
 }
