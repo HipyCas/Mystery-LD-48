@@ -7,7 +7,7 @@ public class Hint : ScriptableObject
 {
   public new string name;
   public string description;
-  
+
   public Hint[] requiredHints;
   public Node[] requiredNodes;
 

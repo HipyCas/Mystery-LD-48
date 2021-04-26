@@ -4,7 +4,13 @@ using UnityEngine;
 
 public class Pin : MonoBehaviour
 {
-  //public Collider collider;
+
+  public Hint hint;
+
+  public List<Node> nodes;
+
+  private bool hitMe;
+
   // Start is called before the first frame update
   void Start()
   {
@@ -14,10 +20,26 @@ public class Pin : MonoBehaviour
   // Update is called once per frame
   void Update()
   {
+    hitMe = false;
+
+    Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition); // Clone to the function (checks if the ray is colliding with a connection or a pin)
+    RaycastHit hit;
+    if (Physics.Raycast(ray, out hit, 100)) // 100 is the max distance the ray reaches (consumes less resources)
+    {
+      if (hit.transform.gameObject.name == name) // The prefab has a tag called "Pin"
+      {
+        hitMe = true;
+      }
+    }
+    else return;
+
+    if (hitMe && Input.GetMouseButtonDown(2))
+    {
+      foreach (Node node in nodes)
+      {
+        Destroy(node.gameObject);
+      }
+    }
   }
 
-  private void OnMouseDown()
-  {
-    Destroy(gameObject);
-  }
 }
