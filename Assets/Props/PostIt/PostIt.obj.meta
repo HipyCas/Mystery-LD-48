@@ -3,7 +3,12 @@ guid: 813b62359725a7441ac20463df961bfc
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: PostIt
+    second: {fileID: 2100000, guid: efaa4280c160d9045bdec5fbcb06ce56, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
