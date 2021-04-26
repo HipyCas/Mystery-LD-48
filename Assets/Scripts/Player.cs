@@ -7,6 +7,10 @@ public class Player : MonoBehaviour
   public List<Hint> collectedHints;
   public Node[] objectiveNodes;
   [SerializeField] private List<Node> collectedNodes;
+
+  public int minimumNodesToWin;
+  public int minimumSecondsToWin;
+
   // Start is called before the first frame update
   void Start()
   {
@@ -28,7 +32,7 @@ public class Player : MonoBehaviour
 
   public void RandomWin()
   {
-    if (collectedNodes.Count > 2 && Constants.GetTimeHandler().TimeSpan.TotalSeconds > (Constants.GetTimeHandler().JourneyStartTimeSpan.TotalSeconds + 1))
+    if (collectedNodes.Count > minimumNodesToWin && Constants.GetTimeHandler().TimeSpan.TotalSeconds > (Constants.GetTimeHandler().JourneyStartTimeSpan.TotalSeconds + minimumSecondsToWin))
     {
       //Debug.Log("Can randomly win!!! Hurray!!!");
       if (true)//(new System.Random()).Next(5) == 0)

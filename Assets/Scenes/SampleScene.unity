@@ -1542,8 +1542,8 @@ MonoBehaviour:
   collectedHints: []
   objectiveNodes: []
   collectedNodes: []
-  minimumNodesToWin: 0
-  minimumSecondsToWin: 0
+  minimumNodesToWin: 7
+  minimumSecondsToWin: 120
 --- !u!4 &456245208
 Transform:
   m_ObjectHideFlags: 0
