@@ -32,6 +32,8 @@ public class CameraController : MonoBehaviour
 
     transform.LookAt(newPosition, Vector3.up);
 
+    if (Input.GetKey(KeyCode.UpArrow) && camera.fieldOfView > minFieldOfView) camera.fieldOfView -= zoomScale;
+    if (Input.GetKey(KeyCode.DownArrow) && camera.fieldOfView < maxFieldOfView) camera.fieldOfView += zoomScale;
     if ((camera.fieldOfView < maxFieldOfView && Input.mouseScrollDelta.y < 0) || (camera.fieldOfView > minFieldOfView && Input.mouseScrollDelta.y > 0)) camera.fieldOfView -= Input.mouseScrollDelta.y * zoomScale;
   }
 }
