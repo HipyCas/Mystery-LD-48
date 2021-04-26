@@ -17,12 +17,24 @@ public class Player : MonoBehaviour
   // Update is called once per frame
   void Update()
   {
-
+    //RandomWin();
   }
 
   public void AddNode(Hint firstHint, Hint secondHint)//, int connectionGameObjectID)
   {
     Node node = new Node((firstHint ?? (new Hint())), (secondHint ?? (new Hint())));//, connectionGameObjectID);
     collectedNodes.Add(node);
+  }
+
+  public void RandomWin()
+  {
+    if (collectedNodes.Count > 2 && Constants.GetTimeHandler().TimeSpan.TotalSeconds > (Constants.GetTimeHandler().JourneyStartTimeSpan.TotalSeconds + 1))
+    {
+      //Debug.Log("Can randomly win!!! Hurray!!!");
+      if (true)//(new System.Random()).Next(5) == 0)
+      {
+        Constants.AnimateWin();
+      }
+    }
   }
 }

@@ -10,8 +10,23 @@ public class Constants : MonoBehaviour
 
   public static string PLAYER_SELECTOR = "/Player";
 
+  public static string TIME_HANDLER_SELECTOR = "/TimeHandler";
+
+  public static string CANVAS_SELECTOR = "/Canvas";
+  public static string WIN_ANIMATION_NAME = "Win";
+
   public static Player GetPlayer()
   {
     return GameObject.FindObjectOfType<Player>();
+  }
+
+  public static TimeHandler GetTimeHandler()
+  {
+    return GameObject.FindObjectOfType<TimeHandler>();
+  }
+
+  public static void AnimateWin()
+  {
+    GameObject.Find(CANVAS_SELECTOR).GetComponent<Animator>().Play(WIN_ANIMATION_NAME);
   }
 }

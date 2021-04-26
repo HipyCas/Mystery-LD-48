@@ -112,6 +112,8 @@ public class LineConnection2 : MonoBehaviour
         firstPosition = Vector3.zero;
         lastPosition = Vector3.zero;
         index++;
+
+        player.RandomWin();
       }
       // FIX ME: Check if current index has a line or not, only destroy it when it does
       else if (index < lines.Count) //lines[index] != null) // Else, you will destroy the current line, so you can start a new one (if on corkboard)

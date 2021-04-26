@@ -26,6 +26,19 @@ public class TimeHandler : MonoBehaviour
   [SerializeField] private GameObject hourHand;
   [SerializeField] private GameObject minuteHand;
 
+  public TimeSpan TimeSpan
+  {
+    get
+    {
+      return ts;
+    }
+  }
+
+  public TimeSpan JourneyStartTimeSpan
+  {
+    get { return journeyStart; }
+  }
+
   // Start is called before the first frame update
   void Start()
   {
