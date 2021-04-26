@@ -1919,6 +1919,7 @@ GameObject:
   m_Component:
   - component: {fileID: 891535970}
   - component: {fileID: 891535971}
+  - component: {fileID: 891535972}
   m_Layer: 0
   m_Name: PauseRadioButton
   m_TagString: Untagged
@@ -1953,6 +1954,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.5, y: 0.5, z: 0.3}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &891535972
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 891535969}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16302af46c888033caf5bfb758d86dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  musicManager: {fileID: 0}
 --- !u!1 &910152275
 GameObject:
   m_ObjectHideFlags: 0
@@ -2421,7 +2435,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 2533359615
+    rgba: 4294967295
   m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
@@ -3757,6 +3771,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1572273438}
   - component: {fileID: 1572273439}
+  - component: {fileID: 1572273440}
   m_Layer: 0
   m_Name: NextRadioButton
   m_TagString: Untagged
@@ -3791,6 +3806,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.5, y: 0.5, z: 0.3}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1572273440
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1572273437}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eaf978cb86152382cacffe6dbe57890d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  musicManager: {fileID: 0}
 --- !u!1001 &1620618476
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4512,6 +4540,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45f340bd7642df178ab0190bfd9aa8ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  RADIO_NEXT_BUTTON_NAME: NextRadioButton
+  RADIO_PAUSE_BUTTON_NAME: PauseRadioButton
 --- !u!4 &1968252361
 Transform:
   m_ObjectHideFlags: 0
@@ -4733,6 +4763,7 @@ MonoBehaviour:
     volume: 1
     pitch: 1
     source: {fileID: 0}
+  isPaused: 0
 --- !u!4 &2145152979 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 95f16a5ecc9156f47b440722fb448cc5, type: 3}
