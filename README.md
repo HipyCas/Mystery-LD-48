@@ -37,3 +37,9 @@ Controls:
 - [Hipy Cas](https://github.com/HipyCas): programmer
 
 - [Pablo GO](https://github.com/PabloGoesOnline): artist/designer
+
+## Atributions
+
+- **Music**: [Admiral Bob](http://dig.ccmixter.org/people/admiralbob77) licensed under [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/)
+
+- **Github page icons**: [FontAwesome 5](https://fontawesome.com) licenses under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/), with the following additional [license](https://fontawesome.com/license/free)
