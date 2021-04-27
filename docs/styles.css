@@ -1,0 +1,43 @@
+@font-face {
+  font-family: CapsmallClean;
+  src: url("./Capsmall_clean.ttf");
+}
+
+html {
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  font-family: CapsmallClean, "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  text-align: center;
+  font-weight: bold;
+  height: 100vh;
+  width: 100vw;
+  padding: auto auto;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #303030;
+  color: #f9f9f9;
+}
+
+h1 {
+  margin-bottom: 0.5em;
+}
+
+#buttons {
+  margin-top: 2em;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-evenly;
+}
+
+a {
+  height: 32px;
+  width: 32px;
+  color: #f9f9f9;
+  opacity: 0.9;
+}
